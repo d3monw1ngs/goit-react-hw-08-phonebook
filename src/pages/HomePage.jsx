@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export const HomePage = () => {
   return (
-    <div>HomePage</div>
-  )
-}
+    <div>
+      <h1>Welcome to the Phonebook App</h1>
+    </div>
+  );
+};

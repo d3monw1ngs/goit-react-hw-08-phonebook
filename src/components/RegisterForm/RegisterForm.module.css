@@ -1,0 +1,39 @@
+RegFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+RegFormError {
+    color: red;
+    margin-bottom: 10px;
+}
+
+RegForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+RegFormField {
+    display: flex;
+    flex-direction: column;
+}
+
+RegFormInput {
+    padding: 10px;
+    font-size: 16px;
+}
+
+RegFormBtn {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
