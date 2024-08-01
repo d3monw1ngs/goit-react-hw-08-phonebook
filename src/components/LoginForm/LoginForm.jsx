@@ -1,45 +1,42 @@
-import React, { useState } from 'react';
-import { useAuth } from 'redux/hooks/useAuth';
+import React from 'react';
+import { useAuth } from '../../redux/hooks/useAuth';
 import css from './LoginForm.module.css';
 
 export const LoginForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const { handleLogin, isLoading, error } = useAuth();
 
     const handleSubmit = e => {
         e.preventDefault();
-        handleLogin({ email, password });
+        const { email, password } = e.target.elements;
+        handleLogin({ email: email.value, password: password.value });
     };
 
   return (
-    <div className={css.loginContainer}>
+    <div className={css.LoginFormContainer}>
         <h1>Login</h1>
-        {error && <div className={css.loginError}>{error}</div>}
-        <form onSubmit={handleSubmit} className={css.loginForm}>
-            <div className={css.loginField}>
+        {error && <div className={css.LoginFormError}>{error}</div>}
+        <form onSubmit={handleSubmit} className={css.LoginForm}>
+            <div className={css.LoginFormField}>
                 <label>Email:</label>
                 <input
                     type="email"
                     id="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    name="email"
                     required
-                    className={css.loginInput}
+                    className={css.LoginFormInput}
                 />
             </div>
-            <div className={css.loginField}>
+            <div className={css.LoginFormField}>
                 <label>Password:</label>
                 <input 
                     type="password"
                     id="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    name="password"
                     required
-                    className={css.loginInput}
+                    className={css.LoginFormInput}
                 />
             </div>
-            <button type="submit" disabled={isLoading} className={css.loginBtn}>
+            <button type="submit" disabled={isLoading} className={css.LoginFormBtn}>
                 {isLoading ? 'Logging in...' : 'Login'}
             </button>
         </form>

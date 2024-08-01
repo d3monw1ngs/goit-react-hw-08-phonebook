@@ -1,4 +1,4 @@
-loginContainer {
+LoginFormContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,29 +7,29 @@ loginContainer {
     max-width: 400px;
 }
 
-loginError {
+LoginFormError {
     color: red;
     margin-bottom: 10px;
 }
 
-loginForm {
+LoginForm {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
 }
 
-loginField {
+LoginFormField {
     display: flex;
     flex-direction: column;
 }
 
-loginInput {
+LoginFormInput {
     padding: 10px;
     font-size: 16px;
 }
 
-loginBtn {
+LoginFormBtn {
     padding: 10px;
     font-size: 16px;
     background-color: #007bff;

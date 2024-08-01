@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchCurrentUser, login, logout, register } from "redux/auth/authOperations";
-import { selectUser, selectIsLoggedIn, selectIsRefreshing, selectAuthError, selectIsLoading } from "../redux/auth/authSelectors";
+import { fetchCurrentUser, login, logout, register } from "../auth/authOperations";
+import { selectUser, selectIsLoggedIn, selectIsRefreshing, selectAuthError, selectIsLoading } from "../auth/authSelectors";
 
 export const useAuth = () => {
     const dispatch = useDispatch();
@@ -12,10 +12,10 @@ export const useAuth = () => {
     const isLoading = useSelector(selectIsLoading);
 
     useEffect(() => {
-        if (!isLoggedIn) {
+        if (!isLoggedIn && !isRefreshing) {
             dispatch(fetchCurrentUser());
         }
-    }, [dispatch, isLoggedIn]);
+    }, [dispatch, isLoggedIn, isRefreshing]);
 
     const handleLogin = (userData) => {
         dispatch(login(userData));
