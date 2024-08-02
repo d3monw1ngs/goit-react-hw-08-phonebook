@@ -1,53 +1,62 @@
-import React from 'react';
-import { useAuth } from '../../redux/hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/auth/authOperations';
 import css from './RegisterForm.module.css';
 
 export const RegisterForm = () => {
-    const { handleRegister, isLoading, error } = useAuth();
+  const dispatch = useDispatch();
 
     const handleSubmit = e => {
         e.preventDefault();
-        const { name, email, password } = e.target.elements;
-        handleRegister({ name: name.value, email: email.value, password: password.value });
+        const form = e.currentTarget;
+        
+        const name = form.elements.name.value.trim();
+        const email = form.elements.name.value.trim();
+        const password = form.elements.name.value.trim();
+
+        if (name && email && password) {
+            dispatch(register({ name, email, password }));
+            form.reset();
+        } else {
+            alert('Please fill out all fields.');
+        }        
     };
 
   return (
-    <div className={css.RegFormContainer}>
+    <div className={css.regFormContainer}>
         <h1>Register</h1>
-        {error && <div className={css.RegFormError}>{error}</div>}
-        <form onSubmit={handleSubmit} className={css.RegForm}>
-            <div className={css.RegFormField}>
+        <form onSubmit={handleSubmit} className={css.regForm}>
+            <div className={css.regFormField}>
                 <label>Name:</label>
-                <input 
+                <input
                     type="text"
                     id="name"
                     name="name"
                     required
-                    className={css.RegFormInput}
+                    className={css.regFormInput}
                 />
             </div>
-            <div className={css.RegFormField}>
+            <div className={css.regFormField}>
                 <label>Email:</label>
                 <input 
                     type="email"
                     id="email"
                     name="email"
                     required
-                    className={css.RegFormInput}                
+                    className={css.regFormInput}                
                 />
             </div>
-            <div className={css.RegFormField}>
+            <div className={css.regFormField}>
                 <label>Password:</label>
                 <input 
                     type="password"
                     id="password"
                     name="password"
                     required
-                    className={css.RegFormInput}                
+                    className={css.regFormInput}                
                 />
             </div>
-            <button type="submit" disabled={isLoading} className={css.RegFormBtn}>
-                {isLoading ? 'Registering...' : 'Register'}
+            <button type="submit" className={css.regFormBtn}>
+                Register
             </button>
         </form>
     </div>

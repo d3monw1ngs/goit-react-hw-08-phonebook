@@ -22,8 +22,7 @@ const handleChange = e => {
   };
       
 const handleSubmit = e => {
-  e.preventDefault();
-        
+  e.preventDefault();        
   if (name.trim() === '' || number.trim() === '') {
     return;
   }

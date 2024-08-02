@@ -1,4 +1,4 @@
-RegFormContainer {
+.regFormContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,29 +7,29 @@ RegFormContainer {
     max-width: 400px;
 }
 
-RegFormError {
+.regFormError {
     color: red;
     margin-bottom: 10px;
 }
 
-RegForm {
+.regForm {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
 }
 
-RegFormField {
+.regFormField {
     display: flex;
     flex-direction: column;
 }
 
-RegFormInput {
+.regFormInput {
     padding: 10px;
     font-size: 16px;
 }
 
-RegFormBtn {
+.regFormBtn {
     padding: 10px;
     font-size: 16px;
     background-color: #007bff;
