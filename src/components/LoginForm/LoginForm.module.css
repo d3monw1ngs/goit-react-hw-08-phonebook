@@ -1,39 +1,44 @@
-.loginFormContainer {
+.form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    width: 300px;
     margin: 0 auto;
-    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.loginFormError {
-    color: red;
-    margin-bottom: 10px;
+.label {
+    margin-bottom: 15px;
 }
 
-.loginForm {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.labelText {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input {
     width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.loginFormField {
-    display: flex;
-    flex-direction: column;
-}
-
-.loginFormInput {
-    padding: 10px;
-    font-size: 16px;
-}
-
-.loginFormBtn {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
+.button {
+    padding: 10px 15px;
     border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #45a049;
 }

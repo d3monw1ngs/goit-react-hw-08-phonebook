@@ -15,6 +15,7 @@ export const register = createAsyncThunk(
     'auth/register', 
     async (userData, thunkAPI) => {
     try {
+        console.log('Registering user with data:', userData);
         const response = await axios.post('/users/signup', userData);
         if (response.data && response.data.token) {
             setAuthToken(response.data.token);
@@ -23,29 +24,34 @@ export const register = createAsyncThunk(
             return thunkAPI.rejectWithValue('Invalid server respone: Missing token');
         }
     } catch (error) {
+        console.error('Registration error:', error.response? error.response.data : error.message);
         return thunkAPI.rejectWithValue(
             error.response ? error.response.data : error.message 
         );
     }
 });
 
-export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) => {
-    try {
-        const response = await axios.post('/users/login', userData);
-        if (response.data && response.data.token) {
-            setAuthToken(response.data.token);
-            return response.data;
-        } else {
-            return thunkAPI.rejectWithValue('Invalid server response: Missing token');
+export const login = createAsyncThunk(
+    'auth/login', 
+    async (userData, thunkAPI) => {
+        try {
+            const response = await axios.post('/users/login', userData);
+            if (response.data && response.data.token) {
+                setAuthToken(response.data.token);
+                return response.data;
+            } else {
+                return thunkAPI.rejectWithValue('Invalid server response: Missing token');
+            }
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response ? error.response.data : error.message 
+            );
         }
-    } catch (error) {
-        return thunkAPI.rejectWithValue(
-            error.response ? error.response.data : error.message 
-        );
-    }
 });
 
-export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const logout = createAsyncThunk(
+    'auth/logout', 
+    async (_, thunkAPI) => {
     try {
         await axios.post('/users/logout');
         setAuthToken(null);
@@ -56,7 +62,9 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     }
 });
 
-export const fetchCurrentUser = createAsyncThunk('auth/fetchCurrentUser', async (_, thunkAPI) => {
+export const fetchCurrentUser = createAsyncThunk(
+    'auth/fetchCurrentUser', 
+    async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 

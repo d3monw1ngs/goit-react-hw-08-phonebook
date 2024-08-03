@@ -1,45 +1,44 @@
 import React from 'react';
-import { useAuth } from '../../redux/hooks/useAuth';
+import { login } from '../../redux/auth/authOperations';
 import css from './LoginForm.module.css';
+import { useDispatch } from 'react-redux';
 
 export const LoginForm = () => {
-    const { handleLogin, isLoading, error } = useAuth();
+    const dispatch = useDispatch();
 
     const handleSubmit = e => {
         e.preventDefault();
-        const { email, password } = e.target.elements;
-        handleLogin({ email: email.value, password: password.value });
+       const form = e.currentTarget;
+       const userData = {
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+       };
+       console.log('Submitting login form with data:', userData);
+       dispatch(login(userData));
+       form.reset();
     };
 
   return (
-    <div className={css.loginFormContainer}>
-        <h1>Login</h1>
-        {error && <div className={css.loginFormError}>{error}</div>}
-        <form onSubmit={handleSubmit} className={css.loginForm}>
-            <div className={css.loginFormField}>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className={css.loginFormInput}
-                />
-            </div>
-            <div className={css.loginFormField}>
-                <label>Password:</label>
-                <input 
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    className={css.loginFormInput}
-                />
-            </div>
-            <button type="submit" disabled={isLoading} className={css.loginFormBtn}>
-                {isLoading ? 'Logging in...' : 'Login'}
-            </button>
-        </form>
-    </div>
+    <form className={css.form} onSubmit={handleSubmit}>
+        <label className={css.label}>
+            <p className={css.labelText}>Email</p>
+            <input
+                className={css.input}
+                type="email"
+                name="email"
+                required
+            />
+        </label>
+        <label className={css.label}>
+            <p className={css.labelText}>Password</p>
+            <input
+                className={css.input}
+                type="password"
+                name="password"
+                required
+            />
+        </label>
+        <button className={css.button} type="submit">Log In</button>
+    </form>
   );
 };

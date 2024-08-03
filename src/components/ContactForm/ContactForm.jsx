@@ -29,9 +29,6 @@ const handleSubmit = e => {
         
   // if it is an existing contact, alert
 const existingContact = contacts.find(contact => {
-  console.log('Comparing contact name:', contact.name);
-  console.log('With new contact name:', name);
-
   if (typeof contact.name === 'string' && typeof name === 'string') {
     return contact.name.toLowerCase() === name.toLowerCase();
   } else {
@@ -44,17 +41,13 @@ if (existingContact) {
   alert(`${name} is already in contacts!`);
 } else {
   alert(`${name} is successfully added to your contacts!`);
-}
-
-// Add Contacts
-addContact({
-  id: nanoid(),
-  name: name.trim(),
-  number: number.trim(),
-});
-        
-// Reset Form fields upon submission
+  addContact({
+    id: nanoid(),
+    name: name.trim(),
+    number: number.trim(),
+  });
   resetForm();
+  }
 };
       
 return (

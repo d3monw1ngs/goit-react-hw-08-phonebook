@@ -11,12 +11,12 @@ export const Filter = ({ filter, setFilter }) => {
     <div className={css.filterContainer}>
         <p className={css.filterText}>Find Contacts by Name</p>
         <input
-        className={css.filterInput}
-        type="text"
-        name="filter"
-        placeholder="Search by name"
-        value={filter}
-        onChange={handleFilterChange}
+          className={css.filterInput}
+          type="text"
+          name="filter"
+          placeholder="Search by name"
+          value={filter}
+          onChange={handleFilterChange}
     />
   </div>
   );

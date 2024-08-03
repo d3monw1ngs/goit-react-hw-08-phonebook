@@ -8,57 +8,46 @@ export const RegisterForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.currentTarget;
-        
-        const name = form.elements.name.value.trim();
-        const email = form.elements.name.value.trim();
-        const password = form.elements.name.value.trim();
-
-        if (name && email && password) {
-            dispatch(register({ name, email, password }));
-            form.reset();
-        } else {
-            alert('Please fill out all fields.');
-        }        
+        const userData = { 
+             name: form.elements.name.value,
+             email: form.elements.email.value,
+             password: form.elements.password.value,
+        };
+        console.log('Submitting registration form with data:', userData) ;
+        dispatch(register(userData));
+        form.reset();      
     };
 
   return (
-    <div className={css.regFormContainer}>
-        <h1>Register</h1>
-        <form onSubmit={handleSubmit} className={css.regForm}>
-            <div className={css.regFormField}>
-                <label>Name:</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className={css.regFormInput}
-                />
-            </div>
-            <div className={css.regFormField}>
-                <label>Email:</label>
-                <input 
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className={css.regFormInput}                
-                />
-            </div>
-            <div className={css.regFormField}>
-                <label>Password:</label>
-                <input 
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    className={css.regFormInput}                
-                />
-            </div>
-            <button type="submit" className={css.regFormBtn}>
-                Register
-            </button>
-        </form>
-    </div>
+    <form className={css.form} onSubmit={handleSubmit}>
+        <label className={css.label}>
+            <p className={css.labelText}>User Name</p>
+            <input
+                className={css.input}
+                type="text"
+                name="name"
+                required
+            />
+        </label>
+        <label className={css.label}>
+            <p className={css.labelText}>Email</p>
+            <input
+                className={css.input}
+                type="email"
+                name="email"
+                required
+            />
+        </label>
+        <label className={css.label}>
+            <p className={css.labelText}>Password</p>
+            <input
+                className={css.input}
+                type="password"
+                name="password"
+                required
+            />
+        </label>
+        <button className={css.button} type="submit">Register</button>
+    </form>
   );
 };
