@@ -3,29 +3,27 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = 'https://connections-api.goit.global';
 
-export const setAuthToken = token => {
+export const setAuthHeader = token => {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export const clearAuthToken = () => {
+export const clearAuthHeader = () => {
     axios.defaults.headers.common.Authorization = '';
 };
 
 export const register = createAsyncThunk(
     'auth/register', 
-    async (userData, thunkAPI) => {
+    async ({name, email, password}, thunkAPI) => {
     try {
-        console.log('Registering user with data:', userData);
-        const response = await axios.post('/users/signup', userData);
-        if (response.data && response.data.token) {
-            setAuthToken(response.data.token);
+        const response = await axios.post('/users/signup', {
+            name,
+            email,
+            password,
+        });
+            setAuthHeader(response.data.token);
             return response.data;
-        } else {
-            return thunkAPI.rejectWithValue('Invalid server respone: Missing token');
-        }
-    } catch (error) {
-        console.error('Registration error:', error.response? error.response.data : error.message);
-        return thunkAPI.rejectWithValue(
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
             error.response ? error.response.data : error.message 
         );
     }
@@ -33,16 +31,12 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
     'auth/login', 
-    async (userData, thunkAPI) => {
+    async ({email, password}, thunkAPI) => {
         try {
-            const response = await axios.post('/users/login', userData);
-            if (response.data && response.data.token) {
-                setAuthToken(response.data.token);
+            const response = await axios.post('/users/login', {email, password});
+                setAuthHeader(response.data.token);
                 return response.data;
-            } else {
-                return thunkAPI.rejectWithValue('Invalid server response: Missing token');
-            }
-        } catch (error) {
+            } catch (error) {
             return thunkAPI.rejectWithValue(
                 error.response ? error.response.data : error.message 
             );
@@ -54,7 +48,7 @@ export const logout = createAsyncThunk(
     async (_, thunkAPI) => {
     try {
         await axios.post('/users/logout');
-        clearAuthToken();
+        clearAuthHeader();
     } catch (error) {
         return thunkAPI.rejectWithValue(
             error.response ? error.response.data : error.message
@@ -62,17 +56,15 @@ export const logout = createAsyncThunk(
     }
 });
 
-export const fetchCurrentUser = createAsyncThunk(
-    'auth/fetchCurrentUser', 
+export const refreshUser = createAsyncThunk(
+    'auth/refresh', 
     async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
     if (!persistedToken) {
-        return thunkAPI.rejectWithValue('No token found');
+        return thunkAPI.rejectWithValue('User not found');
     }
-
-    setAuthToken(persistedToken);
 
     try {
         const response = await axios.get('/users/current');
