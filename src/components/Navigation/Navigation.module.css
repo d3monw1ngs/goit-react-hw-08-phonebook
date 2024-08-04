@@ -22,9 +22,9 @@
 }
 
 .user {
-    font-size: 14px;
+    font-size: 1rem;
     color: #089914;
-    margin-right: 16px;
+    margin-right: 1rem;
     font-weight: bold;
     display: flex;
     align-items: center;
