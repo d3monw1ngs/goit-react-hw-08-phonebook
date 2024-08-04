@@ -6,7 +6,7 @@ export const UserMenu = () => {
     const { user, handleLogout } = useAuth();
 
   return (
-    <div clasName={css.userMenu}>
+    <div className={css.userMenu}>
         <p>{user?.email}</p>
         <button onClick={handleLogout}>Logout</button>
     </div>

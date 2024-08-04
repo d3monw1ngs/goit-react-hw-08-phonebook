@@ -4,11 +4,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 axios.defaults.baseURL = 'https://connections-api.goit.global';
 
 export const setAuthToken = token => {
-    if (token) {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    } else {
-        delete axios.defaults.headers.common.Authorization;
-    }
+};
+
+export const clearAuthToken = () => {
+    axios.defaults.headers.common.Authorization = '';
 };
 
 export const register = createAsyncThunk(
@@ -54,7 +54,7 @@ export const logout = createAsyncThunk(
     async (_, thunkAPI) => {
     try {
         await axios.post('/users/logout');
-        setAuthToken(null);
+        clearAuthToken();
     } catch (error) {
         return thunkAPI.rejectWithValue(
             error.response ? error.response.data : error.message

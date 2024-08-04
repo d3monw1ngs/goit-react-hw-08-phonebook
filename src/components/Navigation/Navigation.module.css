@@ -1,8 +1,8 @@
 .nav {
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    padding: 10px;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 10px 50px;
     background-color: #f8f9fa;
     border-bottom: 1px solid #dee2e6;
 }
@@ -19,4 +19,13 @@
 
 .activeNavLink {
     color: #0056b3;
+}
+
+.user {
+    font-size: 14px;
+    color: #089914;
+    margin-right: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
 }
