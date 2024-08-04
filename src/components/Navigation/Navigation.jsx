@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../redux/hooks/useAuth';
 import { useSelector } from 'react-redux';
 import { LogoutButton } from '../LogoutButton/LogoutButton';
+// import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import css from './Navigation.module.css';
 import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
 

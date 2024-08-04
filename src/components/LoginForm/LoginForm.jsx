@@ -1,5 +1,5 @@
 import React from 'react';
-import { login } from '../../redux/auth/authOperations';
+import { logIn } from '../../redux/auth/authOperations';
 import css from './LoginForm.module.css';
 import { useDispatch } from 'react-redux';
 
@@ -14,7 +14,7 @@ export const LoginForm = () => {
         password: form.elements.password.value,
        };
        console.log('Submitting login form with data:', userData);
-       dispatch(login(userData));
+       dispatch(logIn(userData));
        form.reset();
     };
 

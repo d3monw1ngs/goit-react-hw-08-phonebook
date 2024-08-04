@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../auth/authOperations";
+import { logOut } from "../auth/authOperations";
 import { selectUser, selectIsLoggedIn } from "../auth/authSelectors";
 
 export const useAuth = () => {
@@ -8,7 +8,7 @@ export const useAuth = () => {
     const user = useSelector(selectUser);
 
     const handleLogout = () => {
-        dispatch(logout());
+        dispatch(logOut());
     };
     
     return {

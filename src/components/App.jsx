@@ -7,9 +7,12 @@ import { RegisterPage } from '../pages/RegisterPage';
 import { SharedLayout } from '../pages/SharedLayout';
 import { PrivateRoute } from '../components/PrivateRoute/PrivateRoute';
 import { RestrictedRoute } from '../components/RestrictedRoute/RestrictedRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   return (
+      <>
         <Routes>
             <Route path="/" element={<SharedLayout />}>
               <Route index element={<HomePage />} />
@@ -19,7 +22,7 @@ export const App = () => {
                   <RestrictedRoute component={RegisterPage} redirectTo="/contacts" />}
                  />          
               <Route 
-                path="login"
+                path="logIn"
                 element={
                   <RestrictedRoute component={LoginPage} redirectTo="/contacts" />}
                 />
@@ -29,6 +32,8 @@ export const App = () => {
               />
             </Route>
           </Routes>
+          <ToastContainer />
+      </>
   );
 };
 
