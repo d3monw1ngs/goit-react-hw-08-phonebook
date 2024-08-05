@@ -15,13 +15,12 @@ export const RegisterForm = () => {
     const isLoading = useSelector(selectIsLoading);
     const error = useSelector(selectAuthError);
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const resultAction = await dispatch(register({ name, email, password }));
         if (register.fulfilled.match(resultAction)) {
             toast.success('Registration successful!');
-            navigate('/login'); // Redirect to login after successful registration
+            navigate('/login', {state: { fromRegistration: true } }); 
         } else {
             toast.error('Registration failed. Please try again.');
         }
@@ -37,6 +36,7 @@ export const RegisterForm = () => {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
             />
         </label>
         <label className={css.label}>
@@ -47,6 +47,7 @@ export const RegisterForm = () => {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
             />
         </label>
         <label className={css.label}>
@@ -57,6 +58,7 @@ export const RegisterForm = () => {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
             />
         </label>
         <button className={css.button} type="submit" disabled={isLoading}>
