@@ -18,13 +18,13 @@ export const register = createAsyncThunk(
     async ({name, email, password}, thunkAPI) => {
     try {
         const response = await axios.post('/users/signup', {name, email, password});
-            setAuthHeader(response.data.token); // Set the authorization header
-            thunkAPI.dispatch(fetchContacts()); // Fetch contacts after registration
+            setAuthHeader(response.data.token); 
+            thunkAPI.dispatch(fetchContacts()); 
             toast.success('Registration successful!');
             return response.data;
         } catch (error) {
             toast.error('Registration failed!');
-            return thunkAPI.rejectWithValue(error.respone.data.message);
+            return thunkAPI.rejectWithValue(error.message);
     }
 });
 
@@ -33,11 +33,11 @@ export const logIn = createAsyncThunk(
     async ({email, password}, thunkAPI) => {
         try {
             const response = await axios.post('/users/login', {email, password});
-                setAuthHeader(response.data.token); // Set the authorization header
-                thunkAPI.dispatch(fetchContacts()); // Fetch contacts after login
+                setAuthHeader(response.data.token); 
+                thunkAPI.dispatch(fetchContacts()); 
                 return response.data;
             } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error.message);
         }
 });
 
@@ -48,7 +48,7 @@ export const logOut = createAsyncThunk(
         await axios.post('/users/logout');
         clearAuthHeader();
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(error.message);
     }
 });
 
@@ -63,11 +63,11 @@ export const refreshUser = createAsyncThunk(
     }
 
     try {
-        setAuthHeader(persistedToken); // Ensure header is set before the request
+        setAuthHeader(persistedToken); 
         const response = await axios.get('/users/current');
-        thunkAPI.dispatch(fetchContacts()); // Fetch contacts after user refresh
+        thunkAPI.dispatch(fetchContacts()); 
         return response.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(error.message);
     }
 });

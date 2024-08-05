@@ -21,7 +21,7 @@ export const ContactsPage = () => {
   };
 
   const handleDeleteContact = id => {
-    console.log('handleDeleteContact called with id:', id);
+    // console.log('handleDeleteContact called with id:', id);
     dispatch(deleteContact(id));
   };
 

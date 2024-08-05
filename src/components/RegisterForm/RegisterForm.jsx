@@ -21,14 +21,14 @@ export const RegisterForm = () => {
         const resultAction = await dispatch(register({ name, email, password }));
         if (register.fulfilled.match(resultAction)) {
             toast.success('Registration successful!');
-            navigate('/logIn'); // Redirect to login after successful registration
+            navigate('/login'); // Redirect to login after successful registration
         } else {
             toast.error('Registration failed. Please try again.');
         }
     };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
+    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
         <label className={css.label}>
             <p className={css.labelText}>User Name</p>
             <input
@@ -37,8 +37,6 @@ export const RegisterForm = () => {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                autoComplete="off"
-                required
             />
         </label>
         <label className={css.label}>
@@ -49,8 +47,6 @@ export const RegisterForm = () => {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                autoComplete="off"
-                required
             />
         </label>
         <label className={css.label}>
@@ -61,8 +57,6 @@ export const RegisterForm = () => {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="off"
-                required
             />
         </label>
         <button className={css.button} type="submit" disabled={isLoading}>

@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'https://connections-api.goit.global';
 
 // Async thunk for fetching contacts
 export const fetchContacts = createAsyncThunk(
-    'contacts/fetchContacts',
+    '/contacts/fetchContacts',
     async (_, thunkAPI) => {
       try {
         const response = await axios.get('/contacts');
@@ -20,7 +20,7 @@ export const fetchContacts = createAsyncThunk(
 
 // Async thunk for adding contacts
 export const addContact = createAsyncThunk(
-    'contacts/addContact',
+    '/contacts/addContact',
     async (contact, thunkAPI) => {
       try {
         const response = await axios.post('/contacts', contact);
@@ -35,7 +35,7 @@ export const addContact = createAsyncThunk(
 
 // Async thunk for deleting contacts
 export const deleteContact = createAsyncThunk(
-    'contacts/deleteContact',
+    '/contacts/deleteContact',
     async (contactId, thunkAPI) => {
       try {
         await axios.delete(`/contacts/${contactId}`);

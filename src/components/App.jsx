@@ -17,17 +17,17 @@ export const App = () => {
             <Route path="/" element={<SharedLayout />}>
               <Route index element={<HomePage />} />
               <Route
-                path="register"
+                path="/register"
                 element={
                   <RestrictedRoute component={RegisterPage} redirectTo="/contacts" />}
                  />          
               <Route 
-                path="logIn"
+                path="/login"
                 element={
                   <RestrictedRoute component={LoginPage} redirectTo="/contacts" />}
                 />
               <Route 
-                path="contacts" 
+                path="/contacts" 
                 element={<PrivateRoute component={ContactsPage} redirectTo="/login" />} 
               />
             </Route>
